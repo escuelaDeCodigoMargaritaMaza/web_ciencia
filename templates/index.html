@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Riesgo de Diabetes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Formulario</a></li>
+            <li><a href="/graficas">Gráficas de análisis</a></li>
+            <li><a href="/clusters">Clusters (KMeans)</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Formulario de datos del paciente</h2>
+        <form action="/predict" method="post" class="formulario">
+            <label>Edad:</label>
+            <input type="text" name="age" placeholder="52">
+
+            <label>Género:</label>
+            <select name="gender">
+                <option value="0">Femenino</option>
+                <option value="1">Masculino</option>
+            </select>
+
+            <label>Índice de Masa Corporal (BMI):</label>
+            <input type="text" name="bmi" placeholder="29.5">
+
+            <label>Presión arterial (mmHg):</label>
+            <input type="text" name="blood_pressure" placeholder="138">
+
+            <label>Glucosa en ayunas (mg/dL):</label>
+            <input type="text" name="fasting_glucose_level" placeholder="110">
+
+            <label>Nivel de insulina (µU/mL):</label>
+            <input type="text" name="insulin_level" placeholder="15.2">
+
+            <label>HbA1c (%):</label>
+            <input type="text" name="HbA1c_level" placeholder="6.1">
+
+            <label>Colesterol total (mg/dL):</label>
+            <input type="text" name="cholesterol_level" placeholder="210">
+
+            <label>Triglicéridos (mg/dL):</label>
+            <input type="text" name="triglycerides_level" placeholder="180">
+
+            <label>Nivel de actividad física:</label>
+            <select name="physical_activity_level">
+                <option value="0">Alta</option>
+                <option value="1">Baja</option>
+                <option value="2">Media</option>
+            </select>
+
+            <label>Calorías diarias:</label>
+            <input type="text" name="daily_calorie_intake" placeholder="2500">
+
+            <label>Consumo de azúcar (g/día):</label>
+            <input type="text" name="sugar_intake_grams_per_day" placeholder="65">
+
+            <label>Horas de sueño:</label>
+            <input type="text" name="sleep_hours" placeholder="7">
+
+            <label>Nivel de estrés (1-10):</label>
+            <input type="text" name="stress_level" placeholder="6">
+
+            <label>Antecedentes familiares de diabetes:</label>
+            <select name="family_history_diabetes">
+                <option value="0">No</option>
+                <option value="1">Sí</option>
+            </select>
+
+            <label>Circunferencia de cintura (cm):</label>
+            <input type="text" name="waist_circumference_cm" placeholder="98">
+
+            <label>Puntaje de riesgo de diabetes:</label>
+            <input type="text" name="diabetes_risk_score" placeholder="58.4">
+
+            <button type="submit" class="btn">Predecir</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="resultado">
+                <h3>{{ prediction_text }}</h3>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
